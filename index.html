@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Product App</title>
+    <link rel="stylesheet" type="text/css" href="./css/master.css">
+  </head>
+  <body>
+
+    <div class="nav-bar"></div>
+
+    <div id="app">
+      <div class="product">
+        <div class="product-image">
+          <img v-bind:src="image" />
+        </div>
+
+        <div class="product-info">
+          <h1>{{ product }}</h1>
+          <a :href="link" target="_blank">More products like this</a>
+          <p v-if="inventory > 100">In Stock</p>
+          <p v-else-if="inventory < 10 && inventory > 0 ">Almost sold out</p>
+          <p v-else>Out of Stock</p>
+          <span v-if="onSale">On Sales!</span>
+
+          <ul>
+            <li v-for="detail in details">{{ detail }}</li>
+          </ul>
+
+          <div v-for="variant in variants" v-bind:key="variantId">
+            <p v-on:mouseover="updateProduct(variant.varianttImage)">{{ variant.variantColor }}</p>
+          </div>
+
+          <button type="button" name="add_to_cart" v-on:click="addToCart">Add to Cart</button>
+          <button type="button" name="remove_from_cart" @click="removeFromCart">Remove From Cart</button>
+
+          <div class="cart">
+            <p>Cart({{ cart }})</p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="main.js" type="text/javascript"></script>
+  </body>
+</html>
