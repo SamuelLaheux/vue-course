@@ -25,3 +25,9 @@ v-on:mouseover
 v-on:click
 @click
 ```
+
+## Things to know
+
+### computed vs method in Vue
+
+computed is cached
