@@ -20,18 +20,26 @@
           <a :href="link" target="_blank">More products like this</a>
           <p v-if="inventory > 100">In Stock</p>
           <p v-else-if="inventory < 10 && inventory > 0 ">Almost sold out</p>
-          <p v-else>Out of Stock</p>
+          <p v-else
+             v-bind:class="{ outOfStock: inventory <= 0 }">Out of Stock</p>
           <span v-if="onSale">On Sales!</span>
 
           <ul>
             <li v-for="detail in details">{{ detail }}</li>
           </ul>
 
-          <div v-for="variant in variants" v-bind:key="variantId">
-            <p v-on:mouseover="updateProduct(variant.varianttImage)">{{ variant.variantColor }}</p>
+          <div v-for="variant in variants"
+               v-bind:key="variantId"
+               class="color-box"
+               v-bind:style="{ backgroundColor: variant.variantColor}"
+               v-on:mouseover="updateProduct(variant.varianttImage)">
           </div>
 
-          <button type="button" name="add_to_cart" v-on:click="addToCart">Add to Cart</button>
+          <button type="button"
+                  name="add_to_cart"
+                  v-on:click="addToCart"
+                  v-bind:disabled="inventory <= 0"
+                  v-bind:class="{ disabledButton: inventory <= 0 }">Add to Cart</button>
           <button type="button" name="remove_from_cart" @click="removeFromCart">Remove From Cart</button>
 
           <div class="cart">
