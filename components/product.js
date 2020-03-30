@@ -1,3 +1,19 @@
+
+Vue.component('product-details', {
+  props: {
+    details: {
+      type: Array,
+      required: true
+    }
+  },
+  template: `
+    <ul>
+      <li v-for="detail in details">{{ detail }}</li>
+    </ul>
+  `
+})
+
+
 Vue.component('product', {
   props: {
     premium: {
@@ -22,9 +38,7 @@ Vue.component('product', {
 
         <p> Shipping: {{ shipping }} (User is premium: {{ premium }})</p>
 
-        <ul>
-          <li v-for="detail in details">{{ detail }}</li>
-        </ul>
+        <product-details v-bind:details="details"></product-details>
 
         <div v-for="(variant, index) in variants"
              v-bind:key="variant.variantId"
