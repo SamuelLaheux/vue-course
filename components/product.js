@@ -54,10 +54,6 @@ Vue.component('product', {
                 v-bind:class="{ disabledButton: inventory <= 0 }">Add to Cart</button>
         <button type="button" name="remove_from_cart" @click="removeFromCart">Remove From Cart</button>
 
-        <div class="cart">
-          <p>Cart({{ cart }})</p>
-        </div>
-
       </div>
 
     </div>
@@ -83,18 +79,15 @@ Vue.component('product', {
           variantImage: './assets/vmSocks-blue-onWhite.jpg',
           variantQuantity: 0
         }
-      ],
-      cart: 0
+      ]
     }
   },
   methods: {
     addToCart() {
-      this.cart += 1
+      this.$emit("add-to-cart", this.variants[this.selectedVariant].variantId)
     },
     removeFromCart() {
-      if (this.cart > 0) {
-        this.cart -= 1
-      }
+      this.$emit("remove-from-cart", this.variants[this.selectedVariant].variantId)
     },
     updateProduct(index) {
       this.selectedVariant = index
